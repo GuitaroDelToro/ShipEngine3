@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start the Ship Engine</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('cockpit.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .game-container {
+            
+			display: flex;
+            gap: 10px;
+        }
+        .game-button {
+         
+			width: 90px;
+            height: 90px;
+            background-size: cover;
+			background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+		#button1 {
+			transform: translateX(292px)translateY(-60px)			
+
+		}
+		#button2{
+			transform: translateX(-545px)translateY(-390px)
+		}
+		#button3{
+			transform: translateX(-200px)translateY(160px)
+		}
+		#button4{
+			transform: translateX(-880px)translateY(112px)
+		}
+		#button5{
+			transform: translateX(482px)translateY(-90px)
+		}
+    </style>
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <button class="game-button" id="button1" data-order="1" style="background-image: url('button1.png');"></button>
+        <button class="game-button" id="button2" data-order="2" style="background-image: url('button2.png');"></button>
+        <button class="game-button" id="button3" data-order="3" style="background-image: url('button3.png');"></button>
+        <button class="game-button" id="button4" data-order="4" style="background-image: url('button4.png');"></button>
+        <button class="game-button" id="button5" data-order="5" style="background-image: url('button5.png');"></button>
+    </div>
+	
+<script>
+        const correctOrder = ["1", "2", "3", "4", "5"];
+        let playerOrder = [];
+
+        const buttons = document.querySelectorAll('.game-button' );
+
+
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const order = button.getAttribute('data-order');
+                playerOrder.push(order);
+
+                // Change button image to its "pressed" version
+                button.style.backgroundImage = `url('button${parseInt(order) + 5}.png')`;
+                button.disabled = true;
+
+                // Check if the player's input matches the correct order
+                if (playerOrder.length === correctOrder.length) {
+                    if (playerOrder.join('') === correctOrder.join('')) {
+                        alert('Engine Started!');
+                        window.open("https://vimeo.com/1027067288","lavideoduUC");
+                    } else {
+                        alert('Wrong Order! Try Again.');
+                        resetGame();
+                    }
+                }
+            });
+        });
+
+
+
+        function resetGame() {
+            playerOrder = [];
+            buttons.forEach(button => {
+                const order = button.getAttribute('data-order');
+                button.style.backgroundImage = `url('button${order}.jpg')`;
+                button.disabled = false;
+            });
+        }
+
+
+    </script>
+
+    
+
+
+</body>
+</html>
